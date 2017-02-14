@@ -3,19 +3,28 @@ var bp = require('body-parser');
 
 var app = express();
 var port = 3000;
-var reqId;
+var cnt =0;
 
 app.use(bp.json());
 
 
-
-
 app.post('/webhooks/analytics',function (req, res){
+  console.log(req.body);
+  reqId= req.headers['x-request-id'];
   console.log(JSON.stringify(req.headers));
-  var reqId = req.headers['x-request-id'];
   console.log('x-request-id:'+ reqId);
 
-  res.status(202).json({managerId:'b3634ec9-1f93-420a-b0f4-5f1be1c33c98',requestId: 'dsdsd'});
+  if (reqId != undefined){
+  res.json({managerId:'b3634ec9-1f93-420a-b0f4-5f1be1c33c98',requestId: reqId});
+  console.log('reqId is defined')
+  console.log(cnt);
+  cnt++;
+}else {
+    res.status(202);
+    console.log('reqId is undefined');
+    console.log(cnt);
+    cnt++;
+  }
 });
 
 
