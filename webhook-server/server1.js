@@ -1,9 +1,11 @@
+// server that returns 500 after subscription
 /**
 1. user sends post to webhook/subscibe to ovs
 2. x-request-id is being sent in 1. response
 there is also type sent
 3. server response must contain managerId and x-request-id
-4. during farther communication server must response with 202, otherwise webhook is unsubscribe
+4. during farther communication server respond with 502 or 502, webhook keeps subscription for 15 minutes, beacuse it indicates
+mainteinance window
 
 **/
 var express = require('express');
@@ -17,7 +19,7 @@ app.use(bp.json());
 
 
 app.post('/webhooks/analytics',function (req, res){
-  console.log(req.body);
+  //console.log(req.body);
   console.log(req.header);
   reqId = req.headers['x-request-id'];
   typeH = req.headers['type'];
@@ -32,9 +34,9 @@ app.post('/webhooks/analytics',function (req, res){
     console.log(cnt);
     cnt++;}
     else {
-      res.status(202).end();
+      res.status(122).end();
       console.log(cnt);
-      console.log('should send 202');
+      console.log('should send 122');
       cnt++;
     }
 
