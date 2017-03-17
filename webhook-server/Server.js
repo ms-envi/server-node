@@ -1,9 +1,8 @@
 /**
-1. user sends post to webhook/subscibe to ovs
-2. x-request-id is being sent in 1. response
-there is also type sent
+1. user sends post to webhook/subscribe to ovs
+2. x-request-id is being sent in 1. response there is also type sent
 3. server response must contain managerId and x-request-id
-4. during farther communication server must response with 202, otherwise webhook is unsubscribe
+4. during further communication server must respond with 202, otherwise webhook is unsubscribe
 
 **/
 var express = require('express');
